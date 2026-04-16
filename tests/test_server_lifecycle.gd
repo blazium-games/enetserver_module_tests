@@ -1,8 +1,11 @@
-extends GutTest
+extends AutoworkTest
 
 var port = 8080
 
 func before_all():
+	ENetClient.disconnect_from_server()
+	if ENetServer.is_server_active():
+		ENetServer.stop_server()
 	# ENetServer is a singleton
 	assert_not_null(ENetServer, "ENetServer singleton should be available")
 
